@@ -693,38 +693,38 @@ class Game(object):
             self._labels_buffer = game_state.labels_buffer
             self._labels = game_state.labels
 
-            n = np.random.randint(1,1000)
-            filename = '/file_'+str(n)+'.jpg'
-            screen = game_state.screen_buffer.transpose(1,2,0)
-            cv2.imwrite('test_dataset'+filename,screen)
-            distances = []
-            bounding_box = []
-            #print(game_state.game_variables)
-            player_position = [0,0,0] #[game_state.game_variables[0], game_state.game_variables[1], game_state.game_variables[2]]
-            for l in game_state.labels:
-                print('RUnning!!!!')
-                if(l.object_name not in ['DoomPlayer','BulletPuff','Blood','GreenArmor']):
-                    #seen_in_this_episode.add(l.object_name)
-                    object_position = [l.object_position_x,l.object_position_y,l.object_position_z]
-                    distance = euclidean_distance(player_position, object_position)
-            #print("Label:", l.value, ", object id:", l.object_id, ", object name:", l.object_name)
-            #print("Distance", distance)
-                #positions.append(object_position)
-                    distances.append(distance)
-            # Other available fields:
-            #print("Object rotation angle", l.object_angle, "pitch:", l.object_pitch, "roll:", l.object_roll)
+#            n = np.random.randint(1,1000)
+#            filename = '/file_'+str(n)+'.jpg'
+#            screen = game_state.screen_buffer.transpose(1,2,0)
+#            cv2.imwrite('test_dataset'+filename,screen)
+#            distances = []
+#            bounding_box = []
+#            #print(game_state.game_variables)
+#            player_position = [0,0,0] #[game_state.game_variables[0], game_state.game_variables[1], game_state.game_variables[2]]
+#            for l in game_state.labels:
+#                print('RUnning!!!!')
+#                if(l.object_name not in ['DoomPlayer','BulletPuff','Blood','GreenArmor']):
+#                    #seen_in_this_episode.add(l.object_name)
+#                    object_position = [l.object_position_x,l.object_position_y,l.object_position_z]
+#                    distance = euclidean_distance(player_position, object_position)
+#            #print("Label:", l.value, ", object id:", l.object_id, ", object name:", l.object_name)
+#            #print("Distance", distance)
+#                #positions.append(object_position)
+#                    distances.append(distance)
+#            # Other available fields:
+#            #print("Object rotation angle", l.object_angle, "pitch:", l.object_pitch, "roll:", l.object_roll)#
             #print("Object velocity x:", l.object_velocity_x, "y:", l.object_velocity_y, "z:", l.object_velocity_z)
-                    bounding_box.append([l.x, l.y, l.width, l.height])
-    
-                    row = '/test_dataset'+filename
-                    text = [bounding_box[j] for j in sorted(range(len(distances)), key=lambda j: distances[j])[-3:]]
-                #print(text)
-                    for j in range(len(text)):
-                        row = row +','+str(text[j])
-                    print(row)
-                    with open('data.txt','a') as f:
-                        f.write(row+'\n')
-                    f.close()
+#                    bounding_box.append([l.x, l.y, l.width, l.height])
+#    
+#                    row = '/test_dataset'+filename
+#                    text = [bounding_box[j] for j in sorted(range(len(distances)), key=lambda j: distances[j])[-3:]]
+#                #print(text)
+#                    for j in range(len(text)):
+#                        row = row +','+str(text[j])
+#                    print(row)
+#                    with open('data.txt','a') as f:
+#                        f.write(row+'\n')
+#                    f.close()
 
         # update game variables / statistics rewards
         self.update_game_variables()
