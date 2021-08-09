@@ -79,9 +79,13 @@ class DQNModuleBase(nn.Module):
 
         # create state input
         if self.n_variables:
-            #print(len([conv_output]),len([conv_output][0]),len([conv_output][0][0]),len(embeddings), len(embeddings[0]), len(embeddings[0][0]))
-            #print(conv_output.unsqueeze(0).shape, embeddings[0].shape)
-            output = torch.cat([conv_output.unsqueeze(0)] + embeddings, dim=2)
+            #print(conv_output, embeddings, conv_output.unsqueeze(0).shape, embeddings[0].shape, len(conv_output.unsqueeze(0)), len(embeddings)) #, len(embeddings[0].shape))
+            if(len(embeddings[0].shape) != 3):
+                embeddings[0] = embeddings[0].unsqueeze(0)
+                embeddings[1] = embeddings[1].unsqueeze(0)
+                output = torch.cat([conv_output.unsqueeze(0)] + embeddings, dim=2)
+            else:
+                output = torch.cat([conv_output.unsqueeze(0)] + embeddings, dim=2)
         else:
             output = conv_output
 
@@ -195,6 +199,7 @@ class DQN(object):
     def next_action(self, last_states, save_graph=False):
         scores, pred_features = self.f_eval(last_states)
         if self.params.network_type == 'dqn_ff':
+            scores = scores.squeeze(0)
             assert scores.size() == (1, self.module.n_actions)
             scores = scores[0]
             if pred_features is not None:

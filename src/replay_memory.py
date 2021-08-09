@@ -61,7 +61,7 @@ class ReplayMemory:
 
             # index will be the index of s_t
             #print(hist_size, self.size)
-            index = np.random.randint(hist_size - 1, self.size)
+            index = np.random.randint(hist_size - 1, self.size - 1)
 
             # check that we are not wrapping over the cursor
             if self.cursor <= index + 1 < self.cursor + hist_size:
