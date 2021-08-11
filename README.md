@@ -1,5 +1,11 @@
 # Doom-Dataset
 
+## Tested on
+```
+Python > 3.6
+Ubuntu - 18.0.1
+```
+
 ## Setup
 ```
 sudo apt-get update
