@@ -4,6 +4,7 @@
 ```
 Python > 3.6
 Ubuntu - 18.0.1
+PyTorch == 1.8.1+cu102 and 1.9.0+cu102
 ```
 
 ## Setup
